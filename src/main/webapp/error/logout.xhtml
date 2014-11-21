@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core" xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+    <title>Logged out..</title>
+    <h:outputStylesheet library="css" name="main.css"/>
+    <c:set var="root" value="#{request.contextPath}"/>
+    <meta http-equiv="refresh" content="10;url=#{root}/"/>
+    <f:event type="preRenderView" listener="#{appSession.cleanUp()}"/>
+</h:head>
+
+<body>
+<div class="centered" style="width: 350px;">
+    <rich:panel header="Session expired.">
+        <p>Your session has expired - you've been logged out of the system.</p>
+        <p>You will be redirected in 15 seconds to the login page.</p>
+    </rich:panel>
+</div>
+</body>
+</html>

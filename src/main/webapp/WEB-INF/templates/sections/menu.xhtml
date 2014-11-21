@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition>
+    <h:form id="menuForm" prependId="false">
+        <a4j:outputPanel ajaxRendered="true">
+            <a4j:region>
+
+                <div style="min-width: 800px;">
+                    <rich:toolbar rendered="#{appSession.loggedIn}">
+                        <rich:toolbarGroup location="left">
+                            <rich:menuItem label="Home" action="/index.xhtml?faces-redirect=true"/>
+                            <rich:dropDownMenu label="Menu">
+                                <rich:menuItem label="Menu 1"/>
+                                <rich:menuItem label="Menu 2"/>
+                                <rich:menuGroup label="Options">
+                                    <rich:menuItem label="Option 1"/>
+                                    <rich:menuItem label="Option 2"/>
+                                </rich:menuGroup>
+                            </rich:dropDownMenu>
+                        </rich:toolbarGroup>
+
+                        <rich:toolbarGroup location="right">
+                            <rich:dropDownMenu label="Admin menu" rendered="#{'sadmin' == systemUser.activeRole}">
+                                <rich:menuItem label="User management"
+                                               action="/aforms/users.xhtml?faces-redirect=true"/>
+                            </rich:dropDownMenu>
+
+                            <rich:dropDownMenu>
+                                <f:facet name="label">
+                                    <h:panelGroup>
+                                        <h:graphicImage library="images/misc" name="bullet_red.png"
+                                                        rendered="#{activeUser.id != systemUser.id}"
+                                                        style="margin-bottom: -4px;"/>
+                                        <h:outputText value="#{activeUser.name}"/>
+                                    </h:panelGroup>
+                                </f:facet>
+                                <rich:menuItem label="Change password"
+                                               action="/aforms/password.xhtml?faces-redirect=true"/>
+                                <rich:menuItem label="Logout" action="#{appSession.logout}"/>
+                            </rich:dropDownMenu>
+                        </rich:toolbarGroup>
+
+                    </rich:toolbar>
+                </div>
+            </a4j:region>
+        </a4j:outputPanel>
+    </h:form>
+</ui:composition>
+
+</html>

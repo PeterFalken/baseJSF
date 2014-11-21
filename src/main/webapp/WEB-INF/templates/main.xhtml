@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+<h:head>
+    <title>#{appName}</title>
+    <ui:insert name="head"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+
+<h:body>
+    <!-- START: Busy indicator for AJAX calls (System wide) -->
+    <rich:notifyMessages stayTime="2000" />
+    <a4j:status onstart="#{rich:component('statPane')}.show();" onstop="#{rich:component('statPane')}.hide();" />
+    <rich:popupPanel id="statPane" modal="true" moveable="false" resizeable="false">
+        <h:graphicImage library="images" name="wait.gif"/>
+    </rich:popupPanel>
+
+    <!-- END: Busy indicator for AJAX calls (System wide) -->
+
+    <!-- START: This DIV will keep everything (content) centered and off the edges -->
+    <div class="centered" style="width: 98%;">
+        <ui:include src="sections/menu.xhtml"/>
+        <br/>
+
+        <ui:insert name="content"/>
+
+        <br/>
+        <ui:insert name="footer"/>
+    </div>
+    <!-- END: This DIV will keep everything (content) centered and off the edges -->
+
+</h:body>
+</html>

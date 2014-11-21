@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h:form id="mainForm" prependId="false">
+            <a4j:outputPanel ajaxRendered="true">
+                <a4j:region>
+
+                    <div class="centered" style="width: 240px;">
+                        <rich:panel rendered="#{!loggedIn}" header="Enter your credentials.">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel>User:</h:outputLabel>
+                                <h:inputText id="username" value="#{credentials.username}" required="true" size="25"/>
+                                <h:outputLabel>Pass:</h:outputLabel>
+                                <h:inputSecret id="password" value="#{credentials.password}" required="true" size="25"/>
+                            </h:panelGrid>
+                            <hr/>
+                            <div style="text-align: center;">
+                                <h:commandButton value="Enter" action="#{appSession.checkCredentials}"/>
+                            </div>
+                        </rich:panel>
+
+                        <rich:panel rendered="#{loggedIn}" header="Welcome to #{appName}.">
+                            <p>Your credentials have been verified.</p>
+                            <hr/>
+                            <div style="text-align: center;">
+                                <h:commandButton value="Exit" action="#{appSession.logout}"/>
+                            </div>
+                        </rich:panel>
+                    </div>
+
+                </a4j:region>
+            </a4j:outputPanel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
