@@ -13,83 +13,81 @@
                 <a4j:region>
 
                     <h3 class="centered_text">Users</h3>
-                    <div class="centered" style="min-width: 800px;">
-                        <rich:tabPanel>
-                            <a4j:repeat value="#{userStartLetters}" var="letter">
-                                <rich:tab header="#{letter.toUpperCase()}">
-                                    <rich:dataTable columnClasses="centered_text" rowKeyVar="rowNum" styleClass="centered"
-                                                    value="#{viewUsers.usersForLetter(letter)}" var="u">
-                                        <rich:column>
-                                            <f:facet name="header">#</f:facet>
-                                            <h:outputText value="#{rowNum+1}"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">Username</f:facet>
-                                            <h:outputText value="#{u.username}"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">Name</f:facet>
-                                            <h:outputText value="#{u.name}"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">Last login</f:facet>
-                                            <h:outputText value="#{u.lastLogin}">
-                                                <f:converter binding="#{converterForDate}"/>
-                                            </h:outputText>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">Last logout</f:facet>
-                                            <h:outputText value="#{u.lastLogout}">
-                                                <f:converter binding="#{converterForDate}"/>
-                                            </h:outputText>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">a</f:facet>
-                                            <h:outputText value="#{u.attempts}"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">Act.</f:facet>
-                                            <h:selectBooleanCheckbox value="#{u.active}" disabled="true"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">MCP</f:facet>
-                                            <h:selectBooleanCheckbox value="#{u.mustChangePassword}"
-                                                                     disabled="true"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">.</f:facet>
-                                            <a4j:commandLink>
-                                                <h:graphicImage library="images/icons" name="edit.png" alt="Edit"/>
-                                                <a4j:ajax event="click" execute="@this"
-                                                          listener="#{viewUsers.load(u.id)}"
-                                                          oncomplete="#{rich:component('popup')}.show();"/>
-                                            </a4j:commandLink>
-                                            &nbsp;
-                                            <a4j:commandLink actionListener="#{viewUsers.remove(u.id)}"
-                                                             execute="@this">
-                                                <h:graphicImage library="images/icons" name="remove.png"
-                                                                alt="Delete"/>
-                                            </a4j:commandLink>
-                                            &nbsp;
-                                            <a4j:commandLink actionListener="#{appSession.impersonate(u.id)}"
-                                                             execute="@this"
-                                                             rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
-                                                <h:graphicImage library="images/icons" name="man.png"
-                                                                alt="Impersonate"/>
-                                            </a4j:commandLink>
-                                            &nbsp;
-                                            <a4j:commandLink actionListener="#{loginManager.resetPassword(u.id)}"
-                                                             execute="@this">
-                                                <h:graphicImage library="images/icons" name="unlock.png"
-                                                                alt="Reset password"/>
-                                            </a4j:commandLink>
-                                        </rich:column>
-                                    </rich:dataTable>
+                    <rich:tabPanel styleClass="centered">
+                        <a4j:repeat value="#{userStartLetters}" var="letter">
+                            <rich:tab header="#{letter.toUpperCase()}">
+                                <rich:dataTable columnClasses="centered_text" rowKeyVar="rowNum" styleClass="centered"
+                                                value="#{viewUsers.usersForLetter(letter)}" var="u">
+                                    <rich:column>
+                                        <f:facet name="header">#</f:facet>
+                                        <h:outputText value="#{rowNum+1}."/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">Username</f:facet>
+                                        <h:outputText value="#{u.username}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">Name</f:facet>
+                                        <h:outputText value="#{u.name}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">Last login</f:facet>
+                                        <h:outputText value="#{u.lastLogin}">
+                                            <f:converter binding="#{converterForDate}"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">Last logout</f:facet>
+                                        <h:outputText value="#{u.lastLogout}">
+                                            <f:converter binding="#{converterForDate}"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">a</f:facet>
+                                        <h:outputText value="#{u.attempts}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">Act.</f:facet>
+                                        <h:selectBooleanCheckbox value="#{u.active}" disabled="true"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">MCP</f:facet>
+                                        <h:selectBooleanCheckbox value="#{u.mustChangePassword}"
+                                                                 disabled="true"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">.</f:facet>
+                                        <a4j:commandLink>
+                                            <h:graphicImage library="images/icons" name="edit.png" alt="Edit"/>
+                                            <a4j:ajax event="click" execute="@this"
+                                                      listener="#{viewUsers.load(u.id)}"
+                                                      oncomplete="#{rich:component('popup')}.show();"/>
+                                        </a4j:commandLink>
+                                        &nbsp;
+                                        <a4j:commandLink actionListener="#{viewUsers.remove(u.id)}"
+                                                         execute="@this">
+                                            <h:graphicImage library="images/icons" name="remove.png"
+                                                            alt="Delete"/>
+                                        </a4j:commandLink>
+                                        &nbsp;
+                                        <a4j:commandLink actionListener="#{appSession.impersonate(u.id)}"
+                                                         execute="@this"
+                                                         rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
+                                            <h:graphicImage library="images/icons" name="man.png"
+                                                            alt="Impersonate"/>
+                                        </a4j:commandLink>
+                                        &nbsp;
+                                        <a4j:commandLink actionListener="#{loginManager.resetPassword(u.id)}"
+                                                         execute="@this">
+                                            <h:graphicImage library="images/icons" name="unlock.png"
+                                                            alt="Reset password"/>
+                                        </a4j:commandLink>
+                                    </rich:column>
+                                </rich:dataTable>
 
-                                </rich:tab>
-                            </a4j:repeat>
-                        </rich:tabPanel>
-                    </div>
+                            </rich:tab>
+                        </a4j:repeat>
+                    </rich:tabPanel>
 
                 </a4j:region>
             </a4j:outputPanel>

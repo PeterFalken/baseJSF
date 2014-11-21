@@ -18,7 +18,7 @@
 
     <!-- START: Busy indicator for AJAX calls (System wide) -->
     <a4j:status onstart="#{rich:component('statPane')}.show();" onstop="#{rich:component('statPane')}.hide();"/>
-    <rich:popupPanel id="statPane" modal="true" moveable="false" resizeable="false">
+    <rich:popupPanel id="statPane" autosized="true" modal="true" moveable="false">
         <h:graphicImage library="images" name="wait.gif"/>
     </rich:popupPanel>
     <!-- END: Busy indicator for AJAX calls (System wide) -->
