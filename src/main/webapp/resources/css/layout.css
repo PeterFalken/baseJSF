@@ -1,0 +1,27 @@
+body {
+	margin: 0px auto;
+	/*padding: 10px;*/
+}
+
+/* Space for FOOTER & HEADER */
+.content{
+	margin: 40px auto;
+	width: 96%;
+}
+/* Reserves 40px for HEADER */
+.header	{
+	background-color: rgba(205,205,205,0.75);
+	height: 20px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+}
+/* Reserves 40px for FOOTER */
+.footer	{
+	background-color: rgba(205,205,205,0.75);
+	height: 20px;
+	line-height: 20px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}

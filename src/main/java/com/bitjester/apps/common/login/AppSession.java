@@ -87,7 +87,6 @@ public class AppSession implements Serializable {
 				FacesUtil.navTo("aforms/password.xhtml");
 			// If user has already changed the password.
 			systemUser.setActiveRole(systemUser.getAppRole(appName));
-			logger.info("ActiveRole: " + systemUser.getActiveRole());
 			FacesUtil.addMessage("Welcome, " + systemUser.getName());
 		} else
 			FacesUtil.addMessage("Wrong credentials.");
