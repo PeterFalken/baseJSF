@@ -4,7 +4,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
 
-
 <ui:composition template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         #{appSession.checkRole('sadmin')}
@@ -16,46 +15,46 @@
                     <rich:tabPanel styleClass="centered">
                         <a4j:repeat value="#{userStartLetters}" var="letter">
                             <rich:tab header="#{letter.toUpperCase()}">
-                                <rich:dataTable columnClasses="centered_text" rowKeyVar="rowNum" styleClass="centered"
+                                <rich:dataTable rowKeyVar="rowNum" styleClass="centered"
                                                 value="#{viewUsers.usersForLetter(letter)}" var="u">
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">#</f:facet>
                                         <h:outputText value="#{rowNum+1}."/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">Username</f:facet>
                                         <h:outputText value="#{u.username}"/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">Name</f:facet>
                                         <h:outputText value="#{u.name}"/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">Last login</f:facet>
                                         <h:outputText value="#{u.lastLogin}">
                                             <f:converter binding="#{converterForDate}"/>
                                         </h:outputText>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">Last logout</f:facet>
                                         <h:outputText value="#{u.lastLogout}">
                                             <f:converter binding="#{converterForDate}"/>
                                         </h:outputText>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">a</f:facet>
                                         <h:outputText value="#{u.attempts}"/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">Act.</f:facet>
                                         <h:selectBooleanCheckbox value="#{u.active}" disabled="true"/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">MCP</f:facet>
                                         <h:selectBooleanCheckbox value="#{u.mustChangePassword}"
                                                                  disabled="true"/>
                                     </rich:column>
-                                    <rich:column>
+                                    <rich:column styleClass="centered_text">
                                         <f:facet name="header">.</f:facet>
                                         <a4j:commandLink>
                                             <h:graphicImage library="images/icons" name="edit.png" alt="Edit"/>
