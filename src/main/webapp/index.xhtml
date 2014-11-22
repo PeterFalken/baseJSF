@@ -20,7 +20,7 @@
                                 <h:inputSecret id="password" value="#{credentials.password}" required="true" size="25"/>
                             </h:panelGrid>
                             <hr/>
-                            <div style="text-align: center;">
+                            <div class="centered_text">
                                 <h:commandButton value="Enter" action="#{appSession.checkCredentials}"/>
                             </div>
                         </rich:panel>
@@ -28,7 +28,7 @@
                         <rich:panel rendered="#{loggedIn}" header="Welcome to #{appName}.">
                             <p>Your credentials have been verified.</p>
                             <hr/>
-                            <div style="text-align: center;">
+                            <div class="centered_text">
                                 <h:commandButton value="Exit" action="#{appSession.logout}"/>
                             </div>
                         </rich:panel>

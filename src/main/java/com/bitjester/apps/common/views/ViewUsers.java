@@ -1,8 +1,10 @@
 package com.bitjester.apps.common.views;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
