@@ -118,7 +118,7 @@
                                 </h:selectOneMenu>
                             </h:panelGrid>
                             <hr/>
-                            <div style="text-align: center;">
+                            <div class="centered_text">
                                 <a4j:commandButton value="Save">
                                     <a4j:ajax event="click" listener="#{viewUsers.store}"
                                               oncomplete="if(#{empty facesContext.maximumSeverity}) {#{rich:component('popup')}.hide();}"/>
