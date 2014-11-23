@@ -9,8 +9,16 @@ p {
 	margin: 0px auto;
 }
 
-.centered_text {
+.centered_text	{
 	/* 	display: block; */
 	margin: 0px auto;
 	text-align: center;
+}
+
+.row_even	{
+	background-color: rgba(205,255,254,0.75);
+}
+
+.row_odd	{
+	background-color: rgba(236,243,254,0.75);
 }

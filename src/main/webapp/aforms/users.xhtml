@@ -15,12 +15,41 @@
                     <rich:tabPanel styleClass="centered">
                         <a4j:repeat value="#{userStartLetters}" var="letter">
                             <rich:tab header="#{letter.toUpperCase()}">
-                                <rich:dataTable rowKeyVar="rowNum" styleClass="centered"
+
+                                <rich:dataTable rowKeyVar="rowNum" styleClass="centered" rowClasses="row_odd, row_even"
                                                 value="#{viewUsers.usersForLetter(letter)}" var="u">
                                     <rich:column styleClass="centered_text">
                                         <f:facet name="header">#</f:facet>
                                         <h:outputText value="#{rowNum+1}."/>
                                     </rich:column>
+
+                                    <!-- Enables editing -->
+                                    <rich:column styleClass="centered_text">
+                                        <a4j:commandLink>
+                                            <h:graphicImage library="images/icons" name="edit.png"/>
+                                            <a4j:ajax event="click" execute="@this"
+                                                      listener="#{viewUsers.load(u.id)}"
+                                                      oncomplete="#{rich:component('popup')}.show();"/>
+                                        </a4j:commandLink>
+                                    </rich:column>
+
+                                    <!-- Enables impersonation -->
+                                    <rich:column styleClass="centered_text">
+                                        <a4j:commandLink actionListener="#{appSession.impersonate(u.id)}"
+                                                         execute="@this"
+                                                         rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
+                                            <h:graphicImage library="images/icons" name="man.png"/>
+                                        </a4j:commandLink>
+                                    </rich:column>
+
+                                    <!-- Enable reseting of password -->
+                                    <rich:column styleClass="centered_text">
+                                        <a4j:commandLink actionListener="#{loginManager.resetPassword(u.id)}"
+                                                         execute="@this">
+                                            <h:graphicImage library="images/icons" name="unlock.png"/>
+                                        </a4j:commandLink>
+                                    </rich:column>
+
                                     <rich:column styleClass="centered_text">
                                         <f:facet name="header">Username</f:facet>
                                         <h:outputText value="#{u.username}"/>
@@ -54,32 +83,12 @@
                                         <h:selectBooleanCheckbox value="#{u.mustChangePassword}"
                                                                  disabled="true"/>
                                     </rich:column>
+
+                                    <!-- Enables user removal -->
                                     <rich:column styleClass="centered_text">
-                                        <f:facet name="header">.</f:facet>
-                                        <a4j:commandLink>
-                                            <h:graphicImage library="images/icons" name="edit.png" alt="Edit"/>
-                                            <a4j:ajax event="click" execute="@this"
-                                                      listener="#{viewUsers.load(u.id)}"
-                                                      oncomplete="#{rich:component('popup')}.show();"/>
-                                        </a4j:commandLink>
-                                        &nbsp;
                                         <a4j:commandLink actionListener="#{viewUsers.remove(u.id)}"
                                                          execute="@this">
-                                            <h:graphicImage library="images/icons" name="remove.png"
-                                                            alt="Delete"/>
-                                        </a4j:commandLink>
-                                        &nbsp;
-                                        <a4j:commandLink actionListener="#{appSession.impersonate(u.id)}"
-                                                         execute="@this"
-                                                         rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
-                                            <h:graphicImage library="images/icons" name="man.png"
-                                                            alt="Impersonate"/>
-                                        </a4j:commandLink>
-                                        &nbsp;
-                                        <a4j:commandLink actionListener="#{loginManager.resetPassword(u.id)}"
-                                                         execute="@this">
-                                            <h:graphicImage library="images/icons" name="unlock.png"
-                                                            alt="Reset password"/>
+                                            <h:graphicImage library="images/icons" name="remove.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
