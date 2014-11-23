@@ -8,22 +8,22 @@
 
 
 <composite:interface>
+    <composite:attribute name="paginator" default="false"/>
     <composite:attribute name="rows" default="20"/>
     <composite:attribute name="value" required="true"/>
-    <composite:attribute name="var" required="true"/>
 </composite:interface>
 
 <composite:implementation>
-    <rich:dataTable rowKeyVar="rowNum" styleClass="centered" rowClasses="row_odd, row_even" rows="#{cc.attrs.rows}"
-                    value="#{cc.attrs.value}" var="#{cc.attrs.var}">
-        <c:if test="#{!empty paginator}">
+    <rich:dataTable rowClasses="row_odd, row_even" rowKeyVar="rowKV" rows="#{cc.attrs.rows}"
+                    styleClass="centered" value="#{cc.attrs.value}" var="var">
+        <c:if test="#{cc.attrs.paginator}">
             <!-- START: Top Paginator - DataScroller -->
             <rich:dataScroller boundaryControls="hide" fastControls="hide"/>
             <!-- END: Top Paginator - DataScroller -->
         </c:if>
 
         <!-- START: Row counter column -->
-        <b:column header="#" property="#{rowNum+1}." type="text"/>
+        <b:column header="#" property="#{rowKV+1}." type="text"/>
         <!-- END: Row counter column -->
 
         <!-- START: Children columns -->
@@ -31,7 +31,7 @@
         <!-- END: Children columns -->
 
 
-        <c:if test="#{!empty paginator}">
+        <c:if test="#{cc.attrs.paginator}">
             <!-- START: Bottom Paginator - DataScroller -->
             <rich:dataScroller boundaryControls="hide" fastControls="hide"/>
             <!-- END: Bottom Paginator - DataScroller -->

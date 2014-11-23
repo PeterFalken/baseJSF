@@ -7,110 +7,102 @@
 <ui:composition template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         #{appSession.checkRole('sadmin')}
-        <h:form id="mainForm" prependId="false">
-            <a4j:outputPanel ajaxRendered="true">
-                <a4j:region>
+        <b:form id="mainForm">
 
-                    <h3 class="centered_text">Users</h3>
-                    <rich:tabPanel styleClass="centered">
-                        <a4j:repeat value="#{userStartLetters}" var="letter">
-                            <rich:tab header="#{letter.toUpperCase()}">
+            <h3 class="centered_text">Users</h3>
+            <rich:tabPanel styleClass="centered">
+                <a4j:repeat value="#{userStartLetters}" var="letter">
+                    <rich:tab header="#{letter.toUpperCase()}">
 
-                                <b:dataTable value="#{viewUsers.usersForLetter(letter)}" var="u">
-                                    <!-- Enables editing -->
-                                    <rich:column styleClass="centered_text">
-                                        <a4j:commandLink>
-                                            <h:graphicImage library="images/icons" name="edit.png"/>
-                                            <a4j:ajax event="click" execute="@this"
-                                                      listener="#{viewUsers.load(u.id)}"
-                                                      oncomplete="#{rich:component('popup')}.show();"/>
-                                        </a4j:commandLink>
-                                    </rich:column>
+                        <b:dataTable value="#{viewUsers.usersForLetter(letter)}">
+                            <!-- Enables editing -->
+                            <rich:column styleClass="centered_text">
+                                <a4j:commandLink>
+                                    <h:graphicImage library="images/icons" name="edit.png"/>
+                                    <a4j:ajax event="click" execute="@this"
+                                              listener="#{viewUsers.load(var.id)}"
+                                              oncomplete="#{rich:component('popup')}.show();"/>
+                                </a4j:commandLink>
+                            </rich:column>
 
-                                    <!-- Enables impersonation -->
-                                    <rich:column styleClass="centered_text">
-                                        <a4j:commandLink actionListener="#{appSession.impersonate(u.id)}"
-                                                         execute="@this"
-                                                         rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
-                                            <h:graphicImage library="images/icons" name="man.png"/>
-                                        </a4j:commandLink>
-                                    </rich:column>
+                            <!-- Enables impersonation -->
+                            <rich:column styleClass="centered_text">
+                                <a4j:commandLink actionListener="#{appSession.impersonate(var.id)}"
+                                                 execute="@this"
+                                                 rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
+                                    <h:graphicImage library="images/icons" name="man.png"/>
+                                </a4j:commandLink>
+                            </rich:column>
 
-                                    <!-- Enable reseting of password -->
-                                    <rich:column styleClass="centered_text">
-                                        <a4j:commandLink actionListener="#{loginManager.resetPassword(u.id)}"
-                                                         execute="@this">
-                                            <h:graphicImage library="images/icons" name="unlock.png"/>
-                                        </a4j:commandLink>
-                                    </rich:column>
+                            <!-- Enable reseting of password -->
+                            <rich:column styleClass="centered_text">
+                                <a4j:commandLink actionListener="#{loginManager.resetPassword(var.id)}"
+                                                 execute="@this">
+                                    <h:graphicImage library="images/icons" name="unlock.png"/>
+                                </a4j:commandLink>
+                            </rich:column>
 
-                                    <!-- START: Custom columns -->
-                                    <b:column header="Username" property="#{u.username}" type="text"/>
-                                    <b:column header="Name" property="#{u.name}" type="text"/>
-                                    <b:column header="Last login" property="#{u.lastLogin}" type="date"/>
-                                    <b:column header="Last logout" property="#{u.lastLogout}" type="date"/>
-                                    <b:column header="a" property="#{u.attempts}" type="text"/>
-                                    <b:column header="ACT" property="#{u.active}" type="checkBox"/>
-                                    <b:column header="MCP" property="#{u.mustChangePassword}" type="checkBox"/>
-                                    <!-- END: Custom columns -->
+                            <!-- START: Custom columns -->
+                            <b:column header="Username" property="#{u.username}" type="text"/>
+                            <b:column header="Name" property="#{u.name}" type="text"/>
+                            <b:column header="Last login" property="#{u.lastLogin}" type="date"/>
+                            <b:column header="Last logout" property="#{u.lastLogout}" type="date"/>
+                            <b:column header="a" property="#{u.attempts}" type="text"/>
+                            <b:column header="ACT" property="#{u.active}" type="checkBox"/>
+                            <b:column header="MCP" property="#{u.mustChangePassword}" type="checkBox"/>
+                            <!-- END: Custom columns -->
 
-                                    <!-- Enables user removal -->
-                                    <rich:column styleClass="centered_text">
-                                        <a4j:commandLink actionListener="#{viewUsers.remove(u.id)}"
-                                                         execute="@this">
-                                            <h:graphicImage library="images/icons" name="remove.png"/>
-                                        </a4j:commandLink>
-                                    </rich:column>
-                                </b:dataTable>
+                            <!-- Enables user removal -->
+                            <rich:column styleClass="centered_text">
+                                <a4j:commandLink actionListener="#{viewUsers.remove(var.id)}"
+                                                 execute="@this">
+                                    <h:graphicImage library="images/icons" name="remove.png"/>
+                                </a4j:commandLink>
+                            </rich:column>
+                        </b:dataTable>
 
-                            </rich:tab>
-                        </a4j:repeat>
-                    </rich:tabPanel>
+                    </rich:tab>
+                </a4j:repeat>
+            </rich:tabPanel>
 
-                </a4j:region>
-            </a4j:outputPanel>
-        </h:form>
+        </b:form>
 
         <rich:popupPanel id="popup" autosized="true" modal="true">
-            <h:form id="uForm">
-                <a4j:outputPanel ajaxRendered="true">
-                    <a4j:region>
+            <b:form id="uForm">
 
-                        <fieldset>
-                            <legend>User form:</legend>
-                            <h:panelGrid columns="2">
-                                <h:outputLabel value="Username:"/>
-                                <h:inputText size="40" value="#{managedUser.username}" required="true"/>
-                                <h:outputLabel value="Name:"/>
-                                <h:inputText size="40" value="#{managedUser.name}" required="true"/>
-                                <h:outputLabel value="Active:"/>
-                                <h:selectBooleanCheckbox value="#{managedUser.active}"/>
-                                <h:outputLabel value="MCP:"/>
-                                <h:selectBooleanCheckbox value="#{managedUser.mustChangePassword}"/>
-                                <h:outputLabel value="Role:"/>
-                                <h:selectOneMenu value="#{managedUser.activeRole}" required="true">
-                                    <f:selectItem itemLabel="---" itemValue="---" noSelectionOption="true"/>
-                                    <f:selectItem itemLabel="Admin" itemValue="admin"/>
-                                    <f:selectItem itemLabel="System Admin" itemValue="sadmin"/>
-                                    <f:selectItem itemLabel="User" itemValue="user"/>
-                                </h:selectOneMenu>
-                            </h:panelGrid>
-                            <hr/>
-                            <div class="centered_text">
-                                <a4j:commandButton value="Save">
-                                    <a4j:ajax event="click" listener="#{viewUsers.store}"
-                                              oncomplete="if(#{empty facesContext.maximumSeverity}) {#{rich:component('popup')}.hide();}"/>
-                                </a4j:commandButton>
-                                <a4j:commandButton value="Cancel" immediate="true">
-                                    <a4j:ajax event="click" execute="@this" listener="#{viewUsers.refresh}"
-                                              oncomplete="#{rich:component('popup')}.hide();"/>
-                                </a4j:commandButton>
-                            </div>
-                        </fieldset>
+                <fieldset>
+                    <legend>User form:</legend>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Username:"/>
+                        <h:inputText size="40" value="#{managedUser.username}" required="true"/>
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText size="40" value="#{managedUser.name}" required="true"/>
+                        <h:outputLabel value="Active:"/>
+                        <h:selectBooleanCheckbox value="#{managedUser.active}"/>
+                        <h:outputLabel value="MCP:"/>
+                        <h:selectBooleanCheckbox value="#{managedUser.mustChangePassword}"/>
+                        <h:outputLabel value="Role:"/>
+                        <h:selectOneMenu value="#{managedUser.activeRole}" required="true">
+                            <f:selectItem itemLabel="---" itemValue="---" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Admin" itemValue="admin"/>
+                            <f:selectItem itemLabel="System Admin" itemValue="sadmin"/>
+                            <f:selectItem itemLabel="User" itemValue="user"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <hr/>
+                    <div class="centered_text">
+                        <a4j:commandButton value="Save">
+                            <a4j:ajax event="click" listener="#{viewUsers.store}"
+                                      oncomplete="if(#{empty facesContext.maximumSeverity}) {#{rich:component('popup')}.hide();}"/>
+                        </a4j:commandButton>
+                        <a4j:commandButton value="Cancel" immediate="true">
+                            <a4j:ajax event="click" execute="@this" listener="#{viewUsers.refresh}"
+                                      oncomplete="#{rich:component('popup')}.hide();"/>
+                        </a4j:commandButton>
+                    </div>
+                </fieldset>
 
-                    </a4j:region>
-                </a4j:outputPanel>
-            </h:form>
+            </b:form>
         </rich:popupPanel>
 
     </ui:define>
