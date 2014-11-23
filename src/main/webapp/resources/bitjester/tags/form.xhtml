@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:a4j="http://richfaces.org/a4j">
+
+
+<composite:interface>
+    <composite:attribute name="id" required="true"/>
+    <composite:attribute name="prependId" default="false"/>
+</composite:interface>
+
+<composite:implementation>
+    <h:form id="#{cc.attrs.id}" prependId="#{cc.attrs.rendered}">
+        <a4j:outputPanel ajaxRendered="true">
+            <a4j:region>
+
+                <!-- START: Form's children -->
+                <composite:insertChildren/>
+                <!-- END: Form's children -->
+
+            </a4j:region>
+        </a4j:outputPanel>
+    </h:form>
+</composite:implementation>
+</html>

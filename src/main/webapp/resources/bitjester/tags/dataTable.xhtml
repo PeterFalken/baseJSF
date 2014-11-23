@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:composite="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:rich="http://richfaces.org/rich" xmlns:b="http://java.sun.com/jsf/composite/bitjester/tags">
+
+
+<composite:interface>
+    <composite:attribute name="rows" default="20"/>
+    <composite:attribute name="value" required="true"/>
+    <composite:attribute name="var" required="true"/>
+</composite:interface>
+
+<composite:implementation>
+    <rich:dataTable rowKeyVar="rowNum" styleClass="centered" rowClasses="row_odd, row_even" rows="#{cc.attrs.rows}"
+                    value="#{cc.attrs.value}" var="#{cc.attrs.var}">
+        <c:if test="#{!empty paginator}">
+            <!-- START: Top Paginator - DataScroller -->
+            <rich:dataScroller boundaryControls="hide" fastControls="hide"/>
+            <!-- END: Top Paginator - DataScroller -->
+        </c:if>
+
+        <!-- START: Row counter column -->
+        <b:column header="#" property="#{rowNum+1}." type="text"/>
+        <!-- END: Row counter column -->
+
+        <!-- START: Children columns -->
+        <composite:insertChildren/>
+        <!-- END: Children columns -->
+
+
+        <c:if test="#{!empty paginator}">
+            <!-- START: Bottom Paginator - DataScroller -->
+            <rich:dataScroller boundaryControls="hide" fastControls="hide"/>
+            <!-- END: Bottom Paginator - DataScroller -->
+        </c:if>
+    </rich:dataTable>
+</composite:implementation>
+</html>

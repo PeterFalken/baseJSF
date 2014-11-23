@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:rich="http://richfaces.org/rich" xmlns:b="http://java.sun.com/jsf/composite/bitjester/tags">
 
 <ui:composition template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
@@ -16,13 +16,7 @@
                         <a4j:repeat value="#{userStartLetters}" var="letter">
                             <rich:tab header="#{letter.toUpperCase()}">
 
-                                <rich:dataTable rowKeyVar="rowNum" styleClass="centered" rowClasses="row_odd, row_even"
-                                                value="#{viewUsers.usersForLetter(letter)}" var="u">
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">#</f:facet>
-                                        <h:outputText value="#{rowNum+1}."/>
-                                    </rich:column>
-
+                                <b:dataTable value="#{viewUsers.usersForLetter(letter)}" var="u">
                                     <!-- Enables editing -->
                                     <rich:column styleClass="centered_text">
                                         <a4j:commandLink>
@@ -50,39 +44,15 @@
                                         </a4j:commandLink>
                                     </rich:column>
 
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">Username</f:facet>
-                                        <h:outputText value="#{u.username}"/>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">Name</f:facet>
-                                        <h:outputText value="#{u.name}"/>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">Last login</f:facet>
-                                        <h:outputText value="#{u.lastLogin}">
-                                            <f:converter binding="#{converterForDate}"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">Last logout</f:facet>
-                                        <h:outputText value="#{u.lastLogout}">
-                                            <f:converter binding="#{converterForDate}"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">a</f:facet>
-                                        <h:outputText value="#{u.attempts}"/>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">Act.</f:facet>
-                                        <h:selectBooleanCheckbox value="#{u.active}" disabled="true"/>
-                                    </rich:column>
-                                    <rich:column styleClass="centered_text">
-                                        <f:facet name="header">MCP</f:facet>
-                                        <h:selectBooleanCheckbox value="#{u.mustChangePassword}"
-                                                                 disabled="true"/>
-                                    </rich:column>
+                                    <!-- START: Custom columns -->
+                                    <b:column header="Username" property="#{u.username}" type="text"/>
+                                    <b:column header="Name" property="#{u.name}" type="text"/>
+                                    <b:column header="Last login" property="#{u.lastLogin}" type="date"/>
+                                    <b:column header="Last logout" property="#{u.lastLogout}" type="date"/>
+                                    <b:column header="a" property="#{u.attempts}" type="text"/>
+                                    <b:column header="ACT" property="#{u.active}" type="checkBox"/>
+                                    <b:column header="MCP" property="#{u.mustChangePassword}" type="checkBox"/>
+                                    <!-- END: Custom columns -->
 
                                     <!-- Enables user removal -->
                                     <rich:column styleClass="centered_text">
@@ -91,7 +61,7 @@
                                             <h:graphicImage library="images/icons" name="remove.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
-                                </rich:dataTable>
+                                </b:dataTable>
 
                             </rich:tab>
                         </a4j:repeat>
