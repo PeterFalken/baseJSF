@@ -4,15 +4,9 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
         version="2.0">
     <namespace>http://bitjester.com/jsf/facelets</namespace>
-
     <tag>
         <tag-name>iColumnCL</tag-name>
-        <source>tags/iconColumnCL.xhtml</source>
-        <attribute>
-            <description>Header to be displayed</description>
-            <name>header</name>
-            <required>false</required>
-        </attribute>
+        <source>tags/iColumnCL.xhtml</source>
         <attribute>
             <description>Icon to be displayed</description>
             <name>icon</name>
@@ -32,11 +26,10 @@
 
     <tag>
         <tag-name>pColumn</tag-name>
-        <source>tags/pcolumn.xhtml</source>
+        <source>tags/pColumn.xhtml</source>
         <attribute>
-            <description>Header to be displayed</description>
-            <name>header</name>
-            <required>false</required>
+            <description>Header label to be displayed</description>
+            <name>label</name>
         </attribute>
         <attribute>
             <description>Value to be displayed</description>
@@ -46,18 +39,6 @@
         <attribute>
             <description>Type of the output field to use</description>
             <name>type</name>
-            <required>false</required>
         </attribute>
     </tag>
-
-    <tag>
-        <tag-name>rColumn</tag-name>
-        <source>tags/rcolumn.xhtml</source>
-        <attribute>
-            <description>Name of the rowKeyVar</description>
-            <name>rowKeyVar</name>
-            <required>true</required>
-        </attribute>
-    </tag>
-
 </facelet-taglib>
