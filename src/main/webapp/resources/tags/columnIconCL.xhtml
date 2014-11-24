@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+
+
+<cc:interface>
+    <cc:attribute name="header" default=""/>
+    <cc:attribute name="icon" required="true"/>
+    <cc:attribute name="listener" required="true"/>
+    <cc:attribute name="rendered" default="true"/>
+</cc:interface>
+
+<cc:implementation>
+    <rich:column styleClass="centered_text" rendered="#{cc.attrs.rendered}">
+        <f:facet name="header">
+            <h:outputLabel value="#{cc.attrs.header}"/>
+        </f:facet>
+        <!-- Listener & Icon -->
+        <a4j:commandLink execute="@this" actionListener="#{cc.attrs.listener}">
+            <h:graphicImage library="images/icons" name="#{cc.attrs.icon}"/>
+        </a4j:commandLink>
+    </rich:column>
+</cc:implementation>
+</html>

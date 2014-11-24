@@ -6,6 +6,31 @@
     <namespace>http://bitjester.com/jsf/facelets</namespace>
 
     <tag>
+        <tag-name>iColumnCL</tag-name>
+        <source>tags/iconColumnCL.xhtml</source>
+        <attribute>
+            <description>Header to be displayed</description>
+            <name>header</name>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <description>Icon to be displayed</description>
+            <name>icon</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>Listener to be activated</description>
+            <name>listener</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>Condition for rendering</description>
+            <name>rendered</name>
+            <required>false</required>
+        </attribute>
+    </tag>
+
+    <tag>
         <tag-name>pColumn</tag-name>
         <source>tags/pcolumn.xhtml</source>
         <attribute>
@@ -14,14 +39,14 @@
             <required>false</required>
         </attribute>
         <attribute>
-            <description>Property fo the bean/variable to be displayed</description>
-            <name>property</name>
+            <description>Value to be displayed</description>
+            <name>value</name>
             <required>true</required>
         </attribute>
         <attribute>
             <description>Type of the output field to use</description>
             <name>type</name>
-            <required>true</required>
+            <required>false</required>
         </attribute>
     </tag>
 
@@ -34,6 +59,5 @@
             <required>true</required>
         </attribute>
     </tag>
-
 
 </facelet-taglib>

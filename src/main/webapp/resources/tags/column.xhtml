@@ -10,7 +10,7 @@
 <cc:interface>
     <cc:attribute name="header" default=""/>
     <cc:attribute name="type" required="true"/>
-    <cc:attribute name="property" required="true"/>
+    <cc:attribute name="value" required="true"/>
 </cc:interface>
 
 <cc:implementation>
@@ -23,17 +23,17 @@
         <c:choose>
             <!-- For checkboxes -->
             <c:when test="#{cc.attrs.type == 'checkBox'}">
-                <h:selectBooleanCheckbox disabled="true" value="#{var[cc.attrs.property]}"/>
+                <h:selectBooleanCheckbox disabled="true" value="#{cc.attrs.value}"/>
             </c:when>
             <!-- For dates -->
             <c:when test="#{cc.attrs.type == 'date'}">
-                <h:outputText value="#{var[cc.attrs.property]}">
+                <h:outputText value="#{cc.attrs.value}">
                     <f:converter binding="#{converterForDate}"/>
                 </h:outputText>
             </c:when>
             <!-- For texts -->
             <c:when test="#{cc.attrs.type == 'text'}">
-                <h:outputText value="#{var[cc.attrs.property]}"/>
+                <h:outputText value="#{cc.attrs.value}"/>
             </c:when>
         </c:choose>
 

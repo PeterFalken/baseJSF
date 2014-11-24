@@ -17,6 +17,7 @@
                         <rich:tab header="#{letter.toUpperCase()}">
 
                             <bc:table value="#{viewUsers.usersForLetter(letter)}">
+
                                 <!-- Enables editing -->
                                 <rich:column styleClass="centered_text">
                                     <a4j:commandLink>
@@ -28,30 +29,28 @@
                                 </rich:column>
 
                                 <!-- Enables impersonation -->
-                                <rich:column styleClass="centered_text">
-                                    <a4j:commandLink actionListener="#{appSession.impersonate(var.id)}"
-                                                     execute="@this"
-                                                     rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
-                                        <h:graphicImage library="images/icons" name="man.png"/>
-                                    </a4j:commandLink>
-                                </rich:column>
+                                <bt:iColumnCL icon="man.png" listener="#{appSession.impersonate(var.id)}"
+                                              rendered="#{appSession.systemUser.activeRole == 'sadmin'}"/>
+                                <!-- Enable reseting of password -->
+                                <bt:iColumnCL icon="unlock.png"
+                                              listener="#{authenticationManager.resetPassword(var.id)}"/>
+
+
+                                <bc:columnIconCL icon="man.png" listener="#{appSession.impersonate(var.id)}"
+                                                 rendered="#{appSession.systemUser.activeRole == 'sadmin'}"/>
 
                                 <!-- Enable reseting of password -->
-                                <rich:column styleClass="centered_text">
-                                    <a4j:commandLink actionListener="#{authenticationManager.resetPassword(var.id)}"
-                                                     execute="@this">
-                                        <h:graphicImage library="images/icons" name="unlock.png"/>
-                                    </a4j:commandLink>
-                                </rich:column>
+                                <bc:columnIconCL icon="unlock.png"
+                                                 listener="#{authenticationManager.resetPassword(var.id)}"/>
 
                                 <!-- START: Custom columns -->
-                                <bt:pColumn header="Username" property="username" type="text"/>
-                                <bt:pColumn header="Name" property="name" type="text"/>
-                                <bt:pColumn header="Last login" property="lastLogin" type="date"/>
-                                <bt:pColumn header="Last logout" property="lastLogout" type="date"/>
-                                <bt:pColumn header="A" property="attempts" type="text"/>
-                                <bt:pColumn header="ACT" property="active" type="checkBox"/>
-                                <bt:pColumn header="MCP" property="mustChangePassword" type="checkBox"/>
+                                <bt:pColumn header="Username" value="#{var.username}"/>
+                                <bt:pColumn header="Name" value="#{var.name}"/>
+                                <bt:pColumn header="Last login" value="#{var.lastLogin}" type="date"/>
+                                <bt:pColumn header="Last logout" value="#{var.lastLogout}" type="date"/>
+                                <bt:pColumn header="A" value="#{var.attempts}"/>
+                                <bt:pColumn header="ACT" value="#{var.active}" type="checkBox"/>
+                                <bt:pColumn header="MCP" value="#{var.mustChangePassword}" type="checkBox"/>
                                 <!-- END: Custom columns -->
 
                                 <!-- Enables user removal -->

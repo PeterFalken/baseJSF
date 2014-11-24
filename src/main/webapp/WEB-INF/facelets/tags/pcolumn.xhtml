@@ -7,27 +7,28 @@
 
 <ui:composition>
     <rich:column styleClass="centered_text">
-        <f:facet name="header">
-            <h:outputLabel value="#{header}"/>
-        </f:facet>
+        <c:if test="#{!empty header}">
+            <f:facet name="header">
+                <h:outputLabel value="#{header}"/>
+            </f:facet>
+        </c:if>
 
         <c:choose>
             <!-- For checkboxes -->
             <c:when test="#{type == 'checkBox'}">
-                <h:selectBooleanCheckbox disabled="true" value="#{var[property]}"/>
+                <h:selectBooleanCheckbox disabled="true" value="#{value}"/>
             </c:when>
             <!-- For dates -->
             <c:when test="#{type == 'date'}">
-                <h:outputText value="#{var[property]}">
+                <h:outputText value="#{value}">
                     <f:converter binding="#{converterForDate}"/>
                 </h:outputText>
             </c:when>
             <!-- For texts -->
-            <c:when test="#{type == 'text'}">
-                <h:outputText value="#{var[property]}"/>
-            </c:when>
+            <c:otherwise>
+                <h:outputText value="#{value}"/>
+            </c:otherwise>
         </c:choose>
-
     </rich:column>
 </ui:composition>
 </html>
