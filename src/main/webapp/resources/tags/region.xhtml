@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+
+<cc:interface>
+    <cc:attribute name="ajaxRendered" default="true"/>
+</cc:interface>
+
+<cc:implementation>
+    <a4j:outputPanel ajaxRendered="#{cc.attrs.ajaxRendered}">
+        <a4j:region>
+
+            <!-- START: Form's children -->
+            <cc:insertChildren/>
+            <!-- END: Form's children -->
+
+        </a4j:region>
+    </a4j:outputPanel>
+</cc:implementation>
+</html>

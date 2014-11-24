@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich">
+
+
+<cc:interface>
+    <cc:attribute name="header" default=""/>
+    <cc:attribute name="type" required="true"/>
+    <cc:attribute name="property" required="true"/>
+</cc:interface>
+
+<cc:implementation>
+    <rich:column styleClass="centered_text">
+        <f:facet name="header">
+            <h:outputLabel value="#{cc.attrs.header}"/>
+        </f:facet>
+
+        <!-- Output text according to type of variable -->
+        <c:choose>
+            <!-- For checkboxes -->
+            <c:when test="#{cc.attrs.type == 'checkBox'}">
+                <h:selectBooleanCheckbox disabled="true" value="#{var[cc.attrs.property]}"/>
+            </c:when>
+            <!-- For dates -->
+            <c:when test="#{cc.attrs.type == 'date'}">
+                <h:outputText value="#{var[cc.attrs.property]}">
+                    <f:converter binding="#{converterForDate}"/>
+                </h:outputText>
+            </c:when>
+            <!-- For texts -->
+            <c:when test="#{cc.attrs.type == 'text'}">
+                <h:outputText value="#{var[cc.attrs.property]}"/>
+            </c:when>
+        </c:choose>
+
+    </rich:column>
+</cc:implementation>
+</html>
