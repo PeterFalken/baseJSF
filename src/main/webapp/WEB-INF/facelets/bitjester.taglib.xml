@@ -23,7 +23,6 @@
             <required>false</required>
         </attribute>
     </tag>
-
     <!--tag>
         <tag-name>pColumn</tag-name>
         <source>tags/pColumn.xhtml</source>
