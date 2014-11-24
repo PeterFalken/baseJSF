@@ -14,7 +14,6 @@ import com.bitjester.apps.common.entities.AppUser;
 import com.bitjester.apps.common.utils.BookKeeper;
 import com.bitjester.apps.common.utils.HashUtil;
 
-@Named
 @Stateless
 public class AuthenticationManager implements Serializable {
     private static final long serialVersionUID = 1L;

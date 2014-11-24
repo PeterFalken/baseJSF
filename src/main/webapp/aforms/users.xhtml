@@ -15,7 +15,6 @@
                 <rich:tabPanel styleClass="centered">
                     <a4j:repeat value="#{userStartLetters}" var="letter">
                         <rich:tab header="#{letter.toUpperCase()}">
-
                             <bc:table value="#{viewUsers.usersForLetter(letter)}">
 
                                 <!-- Enables editing -->
@@ -27,14 +26,11 @@
                                                   oncomplete="#{rich:component('popup')}.show();"/>
                                     </a4j:commandLink>
                                 </rich:column>
-
                                 <!-- Enables impersonation -->
                                 <bt:iColumnCL icon="man.png" listener="#{appSession.impersonate(var.id)}"
                                               rendered="#{appSession.systemUser.activeRole == 'sadmin'}"/>
                                 <!-- Enable reseting of password -->
-                                <bt:iColumnCL icon="unlock.png"
-                                                 listener="#{authenticationManager.resetPassword(var.id)}"/>
-
+                                <bt:iColumnCL icon="unlock.png" listener="#{appSession.resetPassword(var.id)}"/>
                                 <!-- START: Custom columns -->
                                 <bt:pColumn label="Username" value="#{var.username}"/>
                                 <bt:pColumn label="Name" value="#{var.name}"/>
@@ -44,11 +40,10 @@
                                 <bt:pColumn label="ACT" value="#{var.active}" type="checkBox"/>
                                 <bt:pColumn label="MCP" value="#{var.mustChangePassword}" type="checkBox"/>
                                 <!-- END: Custom columns -->
-
                                 <!-- Enables user removal -->
-                                <bt:iColumnCL icon="remove.png" listener="#{viewUsers.remove(var.id)}" />
-                            </bc:table>
+                                <bt:iColumnCL icon="remove.png" listener="#{viewUsers.remove(var.id)}"/>
 
+                            </bc:table>
                         </rich:tab>
                     </a4j:repeat>
                 </rich:tabPanel>
