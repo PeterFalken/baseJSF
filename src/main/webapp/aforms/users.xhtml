@@ -2,19 +2,20 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich" xmlns:b="http://java.sun.com/jsf/composite/bitjester/tags">
+      xmlns:rich="http://richfaces.org/rich" xmlns:bc="http://java.sun.com/jsf/composite/tags"
+        xmlns:bt="http://bitjester.com/jsf/facelets">
 
 <ui:composition template="/WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         #{appSession.checkRole('sadmin')}
-        <b:form id="mainForm">
+        <bc:form id="mainForm">
 
             <h3 class="centered_text">Users</h3>
             <rich:tabPanel styleClass="centered">
                 <a4j:repeat value="#{userStartLetters}" var="letter">
                     <rich:tab header="#{letter.toUpperCase()}">
 
-                        <b:dataTable value="#{viewUsers.usersForLetter(letter)}">
+                        <bc:dataTable value="#{viewUsers.usersForLetter(letter)}">
                             <!-- Enables editing -->
                             <rich:column styleClass="centered_text">
                                 <a4j:commandLink>
@@ -43,13 +44,13 @@
                             </rich:column>
 
                             <!-- START: Custom columns -->
-                            <b:column header="Username" property="#{u.username}" type="text"/>
-                            <b:column header="Name" property="#{u.name}" type="text"/>
-                            <b:column header="Last login" property="#{u.lastLogin}" type="date"/>
-                            <b:column header="Last logout" property="#{u.lastLogout}" type="date"/>
-                            <b:column header="a" property="#{u.attempts}" type="text"/>
-                            <b:column header="ACT" property="#{u.active}" type="checkBox"/>
-                            <b:column header="MCP" property="#{u.mustChangePassword}" type="checkBox"/>
+                            <bt:pColumn header="Username" property="username" type="text"/>
+                            <bt:pColumn header="Name" property="name" type="text"/>
+                            <bt:pColumn header="Last login" property="lastLogin" type="date"/>
+                            <bt:pColumn header="Last logout" property="lastLogout" type="date"/>
+                            <bt:pColumn header="A" property="attempts" type="text"/>
+                            <bt:pColumn header="ACT" property="active" type="checkBox"/>
+                            <bt:pColumn header="MCP" property="mustChangePassword" type="checkBox"/>
                             <!-- END: Custom columns -->
 
                             <!-- Enables user removal -->
@@ -59,16 +60,16 @@
                                     <h:graphicImage library="images/icons" name="remove.png"/>
                                 </a4j:commandLink>
                             </rich:column>
-                        </b:dataTable>
+                        </bc:dataTable>
 
                     </rich:tab>
                 </a4j:repeat>
             </rich:tabPanel>
 
-        </b:form>
+        </bc:form>
 
         <rich:popupPanel id="popup" autosized="true" modal="true">
-            <b:form id="uForm">
+            <bc:form id="uForm">
 
                 <fieldset>
                     <legend>User form:</legend>
@@ -102,7 +103,7 @@
                     </div>
                 </fieldset>
 
-            </b:form>
+            </bc:form>
         </rich:popupPanel>
 
     </ui:define>

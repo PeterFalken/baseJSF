@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib
+        xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+        version="2.0">
+    <namespace>http://bitjester.com/jsf/facelets</namespace>
+
+    <tag>
+        <tag-name>pColumn</tag-name>
+        <source>tags/pcolumn.xhtml</source>
+        <attribute>
+            <description>Header to be displayed</description>
+            <name>header</name>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <description>Property fo the bean/variable to be displayed</description>
+            <name>property</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>Type of the output field to use</description>
+            <name>type</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <tag-name>rColumn</tag-name>
+        <source>tags/rcolumn.xhtml</source>
+        <attribute>
+            <description>Name of the rowKeyVar</description>
+            <name>rowKeyVar</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+
+</facelet-taglib>

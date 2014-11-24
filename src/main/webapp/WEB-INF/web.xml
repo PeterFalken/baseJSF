@@ -41,6 +41,12 @@
     </context-param>
     -->
 
+    <!-- Enable custom facelet tags -->
+    <context-param>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+        <param-value>/WEB-INF/facelets/bitjester.taglib.xml</param-value>
+    </context-param>
+
     <context-param>
         <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
         <param-value>true</param-value>
