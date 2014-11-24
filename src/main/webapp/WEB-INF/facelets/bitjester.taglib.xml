@@ -24,7 +24,7 @@
         </attribute>
     </tag>
 
-    <tag>
+    <!--tag>
         <tag-name>pColumn</tag-name>
         <source>tags/pColumn.xhtml</source>
         <attribute>
@@ -40,5 +40,5 @@
             <description>Type of the output field to use</description>
             <name>type</name>
         </attribute>
-    </tag>
+    </tag-->
 </facelet-taglib>
