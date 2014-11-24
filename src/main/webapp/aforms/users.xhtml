@@ -38,7 +38,7 @@
 
                                 <!-- Enable reseting of password -->
                                 <rich:column styleClass="centered_text">
-                                    <a4j:commandLink actionListener="#{loginManager.resetPassword(var.id)}"
+                                    <a4j:commandLink actionListener="#{authenticationManager.resetPassword(var.id)}"
                                                      execute="@this">
                                         <h:graphicImage library="images/icons" name="unlock.png"/>
                                     </a4j:commandLink>

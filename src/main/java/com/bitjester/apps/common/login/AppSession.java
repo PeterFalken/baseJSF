@@ -27,7 +27,7 @@ public class AppSession implements Serializable {
 	private Credentials credentials;
 
 	@Inject
-	LoginManager lm;
+	AuthenticationManager am;
 
 	private AppUser activeUser;
 	private AppUser systemUser;
@@ -56,7 +56,7 @@ public class AppSession implements Serializable {
 			// A systemUser is always impersonating himself.
 			return;
 		// For every other user id, we set the activeUser.
-		AppUser user = lm.getUserForImpersonation(id);
+		AppUser user = am.getUserForImpersonation(id);
 		if (null != user) {
 			activeUser = user;
 			activeUser.setActiveRole(activeUser.getAppRole(appName));
@@ -79,7 +79,7 @@ public class AppSession implements Serializable {
 
 	// -- Login + Credentials methods
 	public void checkCredentials() throws Exception {
-		AppUser user = lm.checkCredentials(credentials.getUsername(), credentials.getPassword());
+		AppUser user = am.checkCredentials(credentials.getUsername(), credentials.getPassword());
 		if (user != null) {
 			systemUser = user;
 			// Check if user must change the password.
@@ -111,7 +111,7 @@ public class AppSession implements Serializable {
 			return;
 		}
 
-		lm.changePassword(systemUser, credentials.getNewPass1());
+		am.changePassword(systemUser, credentials.getNewPass1());
 		systemUser = null;
 		// FacesUtil.invalidateSession();
 		FacesUtil.navTo("error/pchanged.xhtml");
@@ -127,7 +127,7 @@ public class AppSession implements Serializable {
 
 		// If not impersonating - we end the session.
 		if (null != systemUser) {
-			lm.logOutUser(systemUser);
+			am.logOutUser(systemUser);
 			FacesUtil.addMessage("Good bye, " + systemUser.getName());
 		}
 		systemUser = null;
@@ -140,7 +140,7 @@ public class AppSession implements Serializable {
 	public void cleanUp() {
 		try {
 			if (null != systemUser)
-				lm.logOutUser(systemUser);
+				am.logOutUser(systemUser);
 			systemUser = null;
 			activeUser = null;
 			if (null != FacesContext.getCurrentInstance())
