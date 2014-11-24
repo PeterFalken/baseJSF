@@ -31,6 +31,10 @@ public class DefaultUsers {
 		logger.info("Starting application: " + appName + ".");
 		try {
 			checkForUser("admin", "Administrator User","sadmin");
+
+			// Remove for production use.
+			checkForUser("admin2", "Luis Garcia", "user");
+			checkForUser("admon", "Luis Garcia", "user");
 			checkForUser("luis", "Luis Garcia", "user");
 			checkForUser("test", "Test User", "user");
 		} catch (Exception e) {
