@@ -18,26 +18,23 @@
                             <bc:table value="#{viewUsers.usersForLetter(letter)}">
                                 <!-- Enables editing -->
                                 <rich:column styleClass="centered_text">
-                                    <a4j:commandLink>
+                                    <a4j:commandLink action="#{viewUsers.load(var.id)}">
                                         <h:graphicImage library="images/icons" name="edit.png"/>
-                                        <a4j:ajax event="click" execute="@this"
-                                                  listener="#{viewUsers.load(var.id)}"
-                                                  oncomplete="#{rich:component('popup')}.show();"/>
+                                        <a4j:ajax oncomplete="#{rich:component('popup')}.show();"/>
                                     </a4j:commandLink>
                                 </rich:column>
 
                                 <!-- Enables impersonation -->
-                                <rich:column styleClass="centered_text" rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
-                                    <!-- Listener & Icon -->
-                                    <a4j:commandLink execute="@this" actionListener="#{appSession.impersonate(var.id)}">
+                                <rich:column styleClass="centered_text"
+                                             rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
+                                    <a4j:commandLink action="#{appSession.impersonate(var.id)}">
                                         <h:graphicImage library="images/icons" name="man.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
 
                                 <!-- Enable reseting of password -->
                                 <rich:column styleClass="centered_text">
-                                    <!-- Listener & Icon -->
-                                    <a4j:commandLink execute="@this" actionListener="#{appSession.resetPassword(var.id)}">
+                                    <a4j:commandLink action="#{appSession.resetPassword(var.id)}">
                                         <h:graphicImage library="images/icons" name="unlock.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
@@ -54,11 +51,11 @@
 
                                 <!-- Enables user removal -->
                                 <rich:column styleClass="centered_text">
-                                    <!-- Listener & Icon -->
-                                    <a4j:commandLink execute="@this" actionListener="#{viewUsers.remove(var.id)}">
+                                    <a4j:commandLink action="#{viewUsers.remove(var.id)}">
                                         <h:graphicImage library="images/icons" name="remove.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
+
                             </bc:table>
                         </rich:tab>
                     </a4j:repeat>
@@ -92,13 +89,12 @@
                         </h:panelGrid>
                         <hr/>
                         <div class="centered_text">
-                            <a4j:commandButton value="Save">
-                                <a4j:ajax event="click" listener="#{viewUsers.store}"
-                                          oncomplete="if(#{empty facesContext.maximumSeverity}) {#{rich:component('popup')}.hide();}"/>
+                            <a4j:commandButton value="Save" action="#{viewUsers.store}">
+                                <a4j:ajax oncomplete="if(#{empty facesContext.maximumSeverity})
+                                                        {#{rich:component('popup')}.hide();}"/>
                             </a4j:commandButton>
-                            <a4j:commandButton value="Cancel" immediate="true">
-                                <a4j:ajax event="click" execute="@this" listener="#{viewUsers.refresh}"
-                                          oncomplete="#{rich:component('popup')}.hide();"/>
+                            <a4j:commandButton value="Cancel" immediate="true" action="#{viewUsers.refresh}">
+                                <a4j:ajax oncomplete="#{rich:component('popup')}.hide();"/>
                             </a4j:commandButton>
                         </div>
                     </fieldset>

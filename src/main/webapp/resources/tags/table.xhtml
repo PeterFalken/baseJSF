@@ -13,7 +13,7 @@
 </cc:interface>
 
 <cc:implementation>
-    <rich:dataTable rowClasses="row_odd, row_even" rowKeyVar="rowKV" rows="#{cc.attrs.rows}"
+    <rich:dataTable rowClasses="row_1,row_2" rowKeyVar="rowKV" rows="#{cc.attrs.rows}"
                     styleClass="centered" value="#{cc.attrs.value}" var="var">
         <c:if test="#{cc.attrs.paginator}">
             <!-- START: Top Paginator - DataScroller -->

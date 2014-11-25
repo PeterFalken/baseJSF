@@ -15,10 +15,10 @@ p {
     text-align: center;
 }
 
-.row_even {
-    background-color: rgba(205, 255, 254, 0.75);
+.row_1 {
+    background-color: rgba(240, 240, 240, 0.7);
 }
 
-.row_odd {
-    background-color: rgba(236, 243, 254, 0.75);
+.row_2 {
+    background-color: rgba(220, 22, 220, 0.7);
 }

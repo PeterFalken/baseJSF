@@ -5,25 +5,6 @@
         version="2.0">
     <namespace>http://bitjester.com/jsf/facelets</namespace>
     <tag>
-        <tag-name>iColumnCL</tag-name>
-        <source>tags/iColumnCL.xhtml</source>
-        <attribute>
-            <description>Icon to be displayed</description>
-            <name>icon</name>
-            <required>true</required>
-        </attribute>
-        <attribute>
-            <description>Listener to be activated</description>
-            <name>listener</name>
-            <required>true</required>
-        </attribute>
-        <attribute>
-            <description>Condition for rendering</description>
-            <name>rendered</name>
-            <required>false</required>
-        </attribute>
-    </tag>
-    <tag>
         <tag-name>pColumn</tag-name>
         <source>tags/pColumn.xhtml</source>
         <attribute>
