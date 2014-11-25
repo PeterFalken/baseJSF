@@ -71,7 +71,7 @@
             <artifactId>jboss-jsf-api_2.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Import PrimeFaces 4.5.X -->
+        <!-- Import RichFaces 4.5.X -->
         <dependency>
             <groupId>org.richfaces</groupId>
             <artifactId>richfaces</artifactId>

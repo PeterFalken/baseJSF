@@ -81,10 +81,8 @@
                             <h:selectBooleanCheckbox value="#{managedUser.mustChangePassword}"/>
                             <h:outputLabel value="Role:"/>
                             <h:selectOneMenu value="#{managedUser.activeRole}" required="true">
-                                <f:selectItem itemLabel="---" itemValue="---" noSelectionOption="true"/>
-                                <f:selectItem itemLabel="Admin" itemValue="admin"/>
-                                <f:selectItem itemLabel="System Admin" itemValue="sadmin"/>
-                                <f:selectItem itemLabel="User" itemValue="user"/>
+                                <f:selectItem itemLabel="---" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{viewUsers.roles}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <hr/>
