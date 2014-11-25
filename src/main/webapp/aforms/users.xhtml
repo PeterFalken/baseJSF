@@ -16,7 +16,6 @@
                     <a4j:repeat value="#{userStartLetters}" var="letter">
                         <rich:tab header="#{letter.toUpperCase()}">
                             <bc:table value="#{viewUsers.usersForLetter(letter)}">
-
                                 <!-- Enables editing -->
                                 <rich:column styleClass="centered_text">
                                     <a4j:commandLink>
@@ -26,11 +25,23 @@
                                                   oncomplete="#{rich:component('popup')}.show();"/>
                                     </a4j:commandLink>
                                 </rich:column>
+
                                 <!-- Enables impersonation -->
-                                <bt:iColumnCL icon="man.png" listener="#{appSession.impersonate(var.id)}"
-                                              rendered="#{appSession.systemUser.activeRole == 'sadmin'}"/>
+                                <rich:column styleClass="centered_text" rendered="#{appSession.systemUser.activeRole == 'sadmin'}">
+                                    <!-- Listener & Icon -->
+                                    <a4j:commandLink execute="@this" actionListener="#{appSession.impersonate(var.id)}">
+                                        <h:graphicImage library="images/icons" name="man.png"/>
+                                    </a4j:commandLink>
+                                </rich:column>
+
                                 <!-- Enable reseting of password -->
-                                <bt:iColumnCL icon="unlock.png" listener="#{appSession.resetPassword(var.id)}"/>
+                                <rich:column styleClass="centered_text">
+                                    <!-- Listener & Icon -->
+                                    <a4j:commandLink execute="@this" actionListener="#{appSession.resetPassword(var.id)}">
+                                        <h:graphicImage library="images/icons" name="unlock.png"/>
+                                    </a4j:commandLink>
+                                </rich:column>
+
                                 <!-- START: Custom columns -->
                                 <bt:pColumn label="Username" value="#{var.username}"/>
                                 <bt:pColumn label="Name" value="#{var.name}"/>
@@ -40,9 +51,14 @@
                                 <bt:pColumn label="ACT" value="#{var.active}" type="checkBox"/>
                                 <bt:pColumn label="MCP" value="#{var.mustChangePassword}" type="checkBox"/>
                                 <!-- END: Custom columns -->
-                                <!-- Enables user removal -->
-                                <bt:iColumnCL icon="remove.png" listener="#{viewUsers.remove(var.id)}"/>
 
+                                <!-- Enables user removal -->
+                                <rich:column styleClass="centered_text">
+                                    <!-- Listener & Icon -->
+                                    <a4j:commandLink execute="@this" actionListener="#{viewUsers.remove(var.id)}">
+                                        <h:graphicImage library="images/icons" name="remove.png"/>
+                                    </a4j:commandLink>
+                                </rich:column>
                             </bc:table>
                         </rich:tab>
                     </a4j:repeat>

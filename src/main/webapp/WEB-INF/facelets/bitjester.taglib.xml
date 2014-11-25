@@ -29,6 +29,7 @@
         <attribute>
             <description>Header label to be displayed</description>
             <name>label</name>
+            <required>false</required>
         </attribute>
         <attribute>
             <description>Value to be displayed</description>
@@ -38,6 +39,7 @@
         <attribute>
             <description>Type of the output field to use</description>
             <name>type</name>
+            <required>false</required>
         </attribute>
     </tag>
 </facelet-taglib>
