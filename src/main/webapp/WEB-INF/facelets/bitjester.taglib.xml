@@ -23,4 +23,14 @@
             <required>false</required>
         </attribute>
     </tag>
+
+    <tag>
+        <tag-name>pColumns</tag-name>
+        <source>tags/pColumns.xhtml</source>
+        <attribute>
+            <description>Map of values to be displayed</description>
+            <name>values</name>
+            <required>true</required>
+        </attribute>
+    </tag>
 </facelet-taglib>

@@ -7,17 +7,15 @@
 
 
 <cc:interface>
-    <cc:attribute name="ajaxRendered" default="true"/>
+    <cc:attribute name="ajaxRendered" default="#{true}"/>
 </cc:interface>
 
 <cc:implementation>
     <a4j:outputPanel ajaxRendered="#{cc.attrs.ajaxRendered}">
         <a4j:region>
-
             <!-- START: Form's children -->
             <cc:insertChildren/>
             <!-- END: Form's children -->
-
         </a4j:region>
     </a4j:outputPanel>
 </cc:implementation>

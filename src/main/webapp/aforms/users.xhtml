@@ -91,7 +91,7 @@
                                 <a4j:ajax oncomplete="if(#{empty facesContext.maximumSeverity})
                                                         {#{rich:component('popup')}.hide();}"/>
                             </a4j:commandButton>
-                            <a4j:commandButton value="Cancel" immediate="true" action="#{viewUsers.refresh}">
+                            <a4j:commandButton value="Cancel" action="#{viewUsers.refresh}" immediate="true">
                                 <a4j:ajax oncomplete="#{rich:component('popup')}.hide();"/>
                             </a4j:commandButton>
                         </div>
