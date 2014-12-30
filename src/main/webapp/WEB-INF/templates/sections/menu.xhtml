@@ -25,14 +25,13 @@
 
                         <rich:toolbarGroup location="right">
                             <rich:dropDownMenu label="Admin menu" rendered="#{'sadmin' == systemUser.activeRole}">
-                                <rich:menuItem label="User management"
-                                               action="/aforms/users.xhtml?faces-redirect=true"/>
+                                <rich:menuItem label="System users" action="/aforms/users.xhtml?faces-redirect=true"/>
                             </rich:dropDownMenu>
 
                             <rich:dropDownMenu>
                                 <f:facet name="label">
                                     <h:panelGroup>
-                                        <h:graphicImage library="images/misc" name="bullet_red.png"
+                                        <h:graphicImage library="images" name="impersonate.png"
                                                         rendered="#{activeUser.id != systemUser.id}"
                                                         style="margin-bottom: -4px;"/>
                                         <h:outputText value="#{activeUser.name}"/>

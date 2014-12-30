@@ -1,4 +1,4 @@
-package com.bitjester.apps.common.watchdogs;
+package com.bitjester.apps.common.singletons;
 
 import java.util.List;
 import java.util.logging.Logger;
